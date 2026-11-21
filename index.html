@@ -2413,12 +2413,81 @@ summary:focus-visible{outline:2px solid #0e8e89;outline-offset:2px}
 }
 @media(max-width:350px){.eos-proposal-operation-pair{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+
+/* EOS Intelligence · Proposta App Semplificata V1 · seconda revisione di coerenza.
+   Le regole qui rimangono esclusivamente nel file HTML autonomo. */
+/* Tre scelte in tre barre identiche per tutte le larghezze. */
+.eos-proposal-evaluation{display:grid;grid-template-columns:minmax(0,1fr)!important;gap:9px;margin-top:17px}
+.eos-proposal-evaluation .eos-proposal-action{grid-column:1/-1!important;width:100%;min-height:52px;padding:12px 15px;font-size:14px;line-height:1.35;white-space:normal}
+.eos-proposal-evaluation .eos-proposal-question-icon{width:19px;height:19px}
+/* La grafica delle azioni accessorie resta in due colonne e la guida si centra davvero. */
+.eos-proposal-access .eos-proposal-guide-cta{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;padding:12px 14px;min-height:55px}
+.eos-proposal-guide-cta-center{grid-column:2;display:inline-flex;justify-content:center;align-items:center;gap:9px;min-width:0;text-align:center}
+.eos-proposal-guide-cta-center svg{flex:none}
+.eos-proposal-guide-arrow{grid-column:3;justify-self:end;display:inline-flex;align-items:center}
+.eos-proposal-guide-arrow svg{margin:0!important}
+.eos-proposal-access .eos-proposal-operation-pair .eos-proposal-action{font-size:12px;line-height:1.35;min-height:52px;padding:9px 7px}
+/* Font leggermente ridotti, senza ridurre le dimensioni dei bersagli tattili. */
+#dialog .dialog-head h2{font-size:18px;line-height:1.3}
+#dialog .detail-summary h3{font-size:17px;line-height:1.35}
+#dialog .detail-summary p{font-size:13px}
+#dialog .detail-fields .field-pair{font-size:13px}
+#dialog .eos-proposal-state{font-size:11px}
+#dialog .eos-proposal-note-disclosure>summary{font-size:13.5px}
+#dialog .eos-proposal-access .eos-proposal-guide-cta{font-size:13.5px}
+#page-guide .eos-proposal-legend .guide-section-title{font-size:20px;line-height:1.3;letter-spacing:-.35px;margin:0 0 14px}
+#page-guide .eos-proposal-legend .eos-proposal-guide-shelf{gap:9px;margin:0}
+#page-guide .eos-proposal-guide-evaluation>summary{min-height:52px;padding:12px 15px;font-size:14px;line-height:1.35}
+#page-guide .eos-proposal-guide-evaluation p{font-size:13px;line-height:1.6;padding:13px 15px}
+/* Storico: un unico riepilogo di valutazione, note visibili e modifica centralizzata. */
+.eos-proposal-record{margin-top:17px;background:#fff;border:1px solid #d7e5eb;border-radius:13px;padding:16px}
+.eos-proposal-record h4{margin:0 0 12px;font-size:15px;font-weight:750;color:#284e62;line-height:1.4}
+.eos-proposal-record-state{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid #e8eff2;border-bottom:1px solid #e8eff2}
+.eos-proposal-record-state>span:first-child,.eos-proposal-record-notes>span{font-size:12.5px;font-weight:650;color:#687f8e}
+.eos-proposal-record-state .eos-proposal-state{text-align:right}
+.eos-proposal-record-notes{padding:12px 0 0}
+.eos-proposal-record-notes p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55;color:#35596c;margin:5px 0 0}
+.eos-proposal-record-notes p.eos-proposal-no-notes{color:#8a9ca6;font-style:italic}
+.eos-proposal-record .eos-proposal-modify{margin-top:15px;min-height:47px;font-size:13px}
+/* Guida: tre voci come le tre barre in Home, ma qui solo espandibili. */
+#page-guide .eos-proposal-guide-evaluation{border-radius:11px}
+#page-guide .eos-proposal-guide-evaluation>summary{gap:11px}
+#page-guide .eos-proposal-guide-confirmed>summary{background:#31576C;color:#fff}
+#page-guide .eos-proposal-guide-confirmed>summary .eos-proposal-evaluation-symbol{color:#fff}
+#page-guide .eos-proposal-guide-confirmed>summary>svg:last-child{color:#fff}
+#page-guide .eos-proposal-guide-dismissed>summary{background:#fff;color:#31576C}
+#page-guide .eos-proposal-guide-undetermined>summary{background:#edf4f7;color:#31576C}
+#page-guide .eos-proposal-guide-evaluation[open]>summary{border-bottom:1px solid #e4edf0}
+#page-guide .eos-proposal-guide-extras{margin-top:18px}
+#page-guide .eos-proposal-guide-aside{padding:13px 2px;border-top:1px solid #e5ecef}
+#page-guide .eos-proposal-guide-aside h3{font-size:13.5px;color:#31576C;margin:0 0 6px;font-weight:720}
+#page-guide .eos-proposal-guide-aside p{font-size:13px;line-height:1.55;color:#587181;margin:0}
+@media(max-width:620px){
+ .eos-proposal-evaluation{grid-template-columns:minmax(0,1fr)!important}
+ .eos-proposal-evaluation .eos-proposal-action{grid-column:1/-1!important}
+ #dialog .dialog-head h2{font-size:18px}
+ #dialog .detail-summary h3{font-size:16px}
+ #page-guide .eos-proposal-legend .guide-section-title{font-size:19px}
+}
+
+
+/* Proposta App Semplificata V1 — controllo note evidente, escalation senza campo note. */
+.eos-proposal-note-section{margin-top:15px;display:grid;gap:10px}
+.eos-proposal-note-section .eos-proposal-note-card{margin-top:0}
+.eos-proposal-note-save{display:flex;align-items:center;justify-content:center;gap:9px;
+ width:100%;min-height:48px;padding:12px 16px;border:1px solid #31576c;
+ border-radius:11px;background:#31576c;color:#fff;
+ font-family:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.eos-proposal-note-save svg{width:17px;height:17px;flex:none}
+.eos-proposal-note-save:focus-visible{outline:3px solid #368e8a;outline-offset:2px}
+.eos-proposal-note-save:active{transform:translateY(1px)}
 </style></head><body>
 <svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-search" viewbox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></symbol>
 <symbol id="i-home" viewbox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"></path></symbol>
 <symbol id="i-analysis" viewbox="0 0 24 24"><rect height="18" rx="3" width="18" x="3" y="3"></rect><path d="M7 16v-5m5 5V7m5 9v-3"></path></symbol>
 <symbol id="i-inventory" viewbox="0 0 24 24"><path d="M5 8h14v13H5zM3 4h18v4H3zM10 12h4"></path></symbol>
+<symbol id="i-edit" viewbox="0 0 24 24"><path d="M12 20h9"></path><path d="M15.5 5.5a2.12 2.12 0 0 1 3 3L8 19l-4 1 1-4z"></path></symbol>
 <symbol id="i-settings" viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="m10.6 2.8-1 .4-.7 2-2.1.7-1.9-1L3 7.8l1.2 1.7-.4 2.2-1.7 1.1.6 3.1 2 .2 1.3 1.8-.4 2.1 2.8 1.7 1.8-1.4h2l1.7 1.4 2.9-1.7-.4-2.1 1.3-1.8 2-.2.7-3.1-1.8-1.1-.3-2.2 1.1-1.7-1.9-2.8-1.9 1-2.1-.7-.7-2-1-.4z" transform="translate(.4 0) scale(.94)"></path></symbol>
 <symbol id="i-bell" viewbox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 8-3 8-3 9h18c0-1-3-1-3-9M10 21h4"></path></symbol>
 <symbol id="i-play" viewbox="0 0 24 24"><path d="m8 5 11 7-11 7z"></path></symbol>
@@ -2472,7 +2541,7 @@ summary:focus-visible{outline:2px solid #0e8e89;outline-offset:2px}
 <div class="guide-return-banner" hidden="" id="guideReturnBanner"></div>
 <nav aria-label="Argomenti della guida" class="guide-jump">
 <button aria-label="Procedure operative" aria-pressed="true" class="active" data-guide-tab="procedures" type="button">Procedure</button>
-<button aria-label="Stati ed esiti" aria-pressed="false" data-guide-tab="legend" type="button">Valutazioni</button>
+<button aria-label="Valutazioni" aria-pressed="false" data-guide-tab="legend" type="button">Valutazioni</button>
 <button aria-label="Privacy e sicurezza" aria-pressed="false" data-guide-tab="privacy" type="button">Privacy</button>
 </nav>
 <div class="guide-dashboard" id="guideContent"></div>
@@ -2564,7 +2633,7 @@ function badge(a){const s=stateOf(a);return `<span class="eos-proposal-state ${s
 function notePreview(a){return a.notes?`<span class="eos-proposal-history-note">${icon('book')} Note: ${esc(a.notes.slice(0,175))}</span>`:''}
 function toast(text){const t=$('toast');t.textContent=text;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2800)}
 function sorted(){return [...alerts].sort((a,b)=>b.ts-a.ts)}
-function noteField(a,editable){return `<details class="eos-proposal-note-card eos-proposal-note-disclosure"><summary><span>Note segnalazione <em>(facoltative)</em></span>${icon('chevron')}</summary><div class="eos-proposal-note-body">${editable?`<textarea id="proposalNote" aria-label="Note segnalazione facoltative" maxlength="2000" placeholder="Annota soltanto quanto effettivamente osservato...">${esc(a.notes||'')}</textarea><div class="eos-proposal-note-footer"><button type="button" data-save-notes="${esc(a.id)}">Salva note</button></div>`:`<p class="eos-proposal-note-readonly">${a.notes?esc(a.notes):'Nessuna nota inserita.'}</p>`}</div></details>`}
+function noteField(a,editable){return `<div class="eos-proposal-note-section"><details class="eos-proposal-note-card eos-proposal-note-disclosure"><summary><span>Note segnalazione <em>(facoltative)</em></span>${icon('chevron')}</summary><div class="eos-proposal-note-body">${editable?`<textarea id="proposalNote" aria-label="Note segnalazione facoltative" maxlength="2000" placeholder="Annota soltanto quanto effettivamente osservato...">${esc(a.notes||'')}</textarea>`:`<p class="eos-proposal-note-readonly">${a.notes?esc(a.notes):'Nessuna nota inserita.'}</p>`}</div></details>${editable?`<button class="eos-proposal-note-save" type="button" data-save-notes="${esc(a.id)}">${icon('check')} Salva note</button>`:''}</div>`}
 function card(a){return `<button type="button" class="home-directory-card" data-alert="${esc(a.id)}" aria-label="Apri segnalazione ${esc(a.id)}"><span class="home-directory-main"><strong>Gesto sospetto rilevato</strong><span class="home-directory-meta">${esc(a.id)} · ${esc(a.camera)} · ${esc(a.area)}</span><span class="home-directory-meta">${fmtDate(a.ts)} · ${fmtTime(a.ts)}</span></span><span class="home-directory-side">${badge(a)}${icon('arrow')}</span></button>`}
 function renderHome(){const pending=sorted().filter(a=>stateOf(a)==='pending');const shown=homeAll?pending:pending.slice(0,5);$('homeFocus').innerHTML=`<section class="home-directory"><div class="home-directory-heading"><h2 class="home-directory-title">Da verificare <span class="home-total-pill">${pending.length}</span></h2><button type="button" id="homeRefresh" class="home-refresh-icon" aria-label="Aggiorna segnalazioni">${icon('refresh')}</button></div>${shown.length?shown.map(card).join(''):'<div class="eos-proposal-empty">Nessuna segnalazione da verificare</div>'}${pending.length>5?`<button type="button" class="eos-home-more" id="showHomeAll">${homeAll?'Mostra le ultime cinque':'Visualizza tutte le segnalazioni da verificare'}</button>`:''}<button type="button" class="eos-home-history-link" data-page="history">Visualizza segnalazioni precedenti ${icon('arrow')}</button></section>`}
 function matchPeriod(ts){const diff=Date.now()-ts;return historyPeriod==='all'||diff>=0&&diff<({'recent':24,'48':48,'72':72,'7d':168,'30d':720,'90d':2160}[historyPeriod]||168)*H}
@@ -2579,10 +2648,12 @@ function writeNotes(showToast=false){if(!selectedId)return;const a=getAlert(sele
 function detailHtml(a){
  const status=stateOf(a),pending=status==='pending';
  const header=status==='expired'?`<div class="manual-help history-video-note">${icon('lock')} Video non disponibile</div>`:`<div class="detail-video eos-proposal-r23-video"><span class="video-play" aria-hidden="true">${icon('play')}</span><div class="video-caption"><span>Video evento</span><span>Clip reale non collegata in questo laboratorio</span></div></div>`;
- const summary=`<div class="detail-summary eos-detail-outcome-summary"><div><h3>${pending?'Gesto sospetto rilevato':esc(statusLabel[status])}</h3><p>${esc(a.id)} · ${esc(a.camera)}</p></div>${badge(a)}</div><div class="detail-fields"><div class="field-pair"><span>Data e ora</span><strong>${fmtDate(a.ts)} · ${fmtTime(a.ts)}</strong></div><div class="field-pair"><span>Area / zona</span><strong>${esc(a.area)}</strong></div></div>`;
- const actions=pending?`<div class="eos-proposal-evaluation"><button type="button" class="eos-proposal-action primary" data-review="confirmed">${icon('check')} Conferma segnalazione</button><button type="button" class="eos-proposal-action" data-review="dismissed">${icon('close')} Scarta segnalazione</button><button type="button" class="eos-proposal-action wide" data-review="undetermined"><span class="eos-proposal-question-icon" aria-hidden="true">?</span> Non determinabile</button></div>`:status==='expired'?'<p class="eos-proposal-period-warning">La segnalazione non è più verificabile in questa simulazione.</p>':`<button class="eos-proposal-action eos-proposal-modify" type="button" data-edit-evaluation="${esc(a.id)}">${icon('settings')} Modifica valutazione</button>`;
- const operations=pending?`<div class="eos-proposal-access"><div class="eos-proposal-operation-pair"><button type="button" class="eos-proposal-action" data-deterrence="${esc(a.id)}">${icon('volume')} Attiva deterrenza</button><button type="button" class="eos-proposal-action eos-proposal-critical-action" data-escalation="${esc(a.id)}">${icon('shield')} Escalation critica</button></div><button type="button" class="eos-proposal-action eos-proposal-guide-cta" data-quick-guide="${esc(a.id)}">${icon('book')} Guida operativa ${icon('arrow')}</button></div>`:'';
- return `${header}${summary}${actions}${noteField(a,pending)}${operations}${a.critical?`<div class="eos-proposal-safety"><strong>Escalation critica registrata</strong>${a.criticalNotes?`<p>${esc(a.criticalNotes)}</p>`:''}</div>`:''}${a.events?.length?`<details class="eos-revision-log"><summary>Attività (${a.events.length})</summary>${a.events.slice(0,8).map(v=>`<p>${fmtDate(v.ts)} · ${fmtTime(v.ts)} — ${esc(v.label)}</p>`).join('')}</details>`:''}`;
+ const summary=`<div class="detail-summary eos-detail-outcome-summary"><div><h3>Gesto sospetto rilevato</h3><p>${esc(a.id)} · ${esc(a.camera)}</p></div>${badge(a)}</div><div class="detail-fields"><div class="field-pair"><span>Data e ora</span><strong>${fmtDate(a.ts)} · ${fmtTime(a.ts)}</strong></div><div class="field-pair"><span>Area / zona</span><strong>${esc(a.area)}</strong></div></div>`;
+ const actions=`<div class="eos-proposal-evaluation"><button type="button" class="eos-proposal-action primary" data-review="confirmed">${icon('check')} Conferma segnalazione</button><button type="button" class="eos-proposal-action" data-review="dismissed">${icon('close')} Scarta segnalazione</button><button type="button" class="eos-proposal-action wide" data-review="undetermined"><span class="eos-proposal-question-icon" aria-hidden="true">?</span> Non determinabile</button></div>`;
+ const operations=`<div class="eos-proposal-access"><div class="eos-proposal-operation-pair"><button type="button" class="eos-proposal-action" data-deterrence="${esc(a.id)}">${icon('volume')} Attiva deterrenza</button><button type="button" class="eos-proposal-action eos-proposal-critical-action" data-escalation="${esc(a.id)}">${icon('shield')} Escalation critica</button></div><button type="button" class="eos-proposal-action eos-proposal-guide-cta" data-quick-guide="${esc(a.id)}"><span class="eos-proposal-guide-cta-center">${icon('book')} <span>Guida operativa</span></span><span class="eos-proposal-guide-arrow" aria-hidden="true">${icon('arrow')}</span></button></div>`;
+ // History is a read-only view. All changes to evaluation and notes go through the same edit dialog.
+ const historyRecord=`<section class="eos-proposal-record" aria-label="${status==='expired'?'Stato segnalazione':'Valutazione registrata'}"><h4>${status==='expired'?'Stato segnalazione':'Valutazione registrata'}</h4><div class="eos-proposal-record-state"><span>Stato</span>${badge(a)}</div><div class="eos-proposal-record-notes"><span>Note segnalazione</span><p class="${a.notes?'':'eos-proposal-no-notes'}">${a.notes?esc(a.notes):'Nessuna nota inserita.'}</p></div>${status==='expired'?'<p class="eos-proposal-period-warning">La segnalazione non è più verificabile in questa simulazione.</p>':`<button class="eos-proposal-action eos-proposal-modify" type="button" data-edit-evaluation="${esc(a.id)}">${icon('edit')} Modifica valutazione</button>`}</section>`;
+ return `${header}${summary}${pending?actions+noteField(a,true)+operations:historyRecord}${a.critical?`<div class="eos-proposal-safety"><strong>Escalation critica registrata</strong></div>`:''}${a.events?.length?`<details class="eos-revision-log"><summary>Attività (${a.events.length})</summary>${a.events.slice(0,8).map(v=>`<p>${fmtDate(v.ts)} · ${fmtTime(v.ts)} — ${esc(v.label)}</p>`).join('')}</details>`:''}`;
 }
 function showDetail(id){const a=getAlert(id);if(!a)return;selectedId=id;openModal(stateOf(a)==='expired'?'Dettaglio segnalazione scaduta':'Dettaglio segnalazione',detailHtml(a),'detail')}
 function openReview(kind,fromEdit=false){const a=getAlert(selectedId);if(!a||!choices[kind])return;writeNotes(false);const current=stateOf(a);if(!fromEdit&&current!=='pending')return;openModal('Valutazione segnalazione',`<button class="eos-proposal-back" data-back-detail type="button">${icon('arrow-left')} Torna alla segnalazione</button><p class="eos-proposal-confirm">${esc(choices[kind])}: stai valutando la <strong>segnalazione</strong>, non accertando un furto.</p><div class="form-actions"><button class="outline-btn" data-back-detail type="button">Annulla</button><button class="primary-btn" data-commit-review="${kind}" type="button">${esc(choices[kind])}</button></div>`,'review')}
@@ -2606,7 +2677,7 @@ function commitEvaluationEdit(){
 }
 function quickGuide(){
  const a=getAlert(selectedId);if(!a||stateOf(a)!=='pending')return;writeNotes(false);
- const destinations=`<option value="procedures">Procedure operative</option><option value="legend">Stati e valutazioni</option><option value="privacy">Privacy e sicurezza</option>${GUIDE_PROCEDURES.map(p=>`<option value="procedure:${esc(p.id)}">${esc(p.title)}</option>`).join('')}`;
+ const destinations=`<option value="procedures">Procedure operative</option><option value="legend">Come valutare una segnalazione</option><option value="privacy">Privacy e sicurezza</option>${GUIDE_PROCEDURES.map(p=>`<option value="procedure:${esc(p.id)}">${esc(p.title)}</option>`).join('')}`;
  openModal('Guida operativa',`<button type="button" class="eos-proposal-back" data-back-detail>${icon('arrow-left')} Torna alla segnalazione</button><div class="eos-proposal-quick"><div class="eos-proposal-quick-step"><b>1</b><div><strong>Osserva la clip</strong><p>Valuta i gesti realmente visibili. Una segnalazione non è una prova di furto.</p></div></div><div class="eos-proposal-quick-step"><b>2</b><div><strong>Agisci con discrezione</strong><p>Segui le procedure aziendali e coinvolgi il responsabile se necessario.</p></div></div><div class="eos-proposal-quick-step"><b>3</b><div><strong>Registra la valutazione</strong><p>Conferma, scarta oppure scegli Non determinabile. Le note sono facoltative.</p></div></div></div><div class="eos-proposal-safety"><strong>La sicurezza prima di tutto</strong><p>Non accusare, inseguire o affrontare fisicamente persone sulla base di una segnalazione. In emergenza segui le procedure del negozio e chiama il 112.</p></div><div class="eos-proposal-guide-destination"><label for="guideDestination">Vuoi approfondire una situazione specifica? <em>(facoltativo)</em></label><select id="guideDestination">${destinations}</select></div><button class="eos-proposal-action primary eos-proposal-edit-save" data-complete-guide="1" type="button">Consulta la guida completa ${icon('arrow')}</button>`,'quick');
 }
 function completeGuide(){
@@ -2619,16 +2690,20 @@ function deterrence(){const a=getAlert(selectedId);if(!a)return;writeNotes(false
 async function play(){audio=$('proposalAudio');if(!audio)return;try{audio.currentTime=0;await audio.play();const a=getAlert(selectedId);if(a){a.events.unshift({ts:Date.now(),label:'Messaggio ascoltato sul dispositivo (simulazione)'});save()}}catch(e){toast('Impossibile riprodurre il messaggio su questo dispositivo')}}
 function escalation(){
  const a=getAlert(selectedId);if(!a||stateOf(a)!=='pending')return;writeNotes(false);
- openModal('Escalation critica',`<button type="button" class="eos-proposal-back" data-back-detail>${icon('arrow-left')} Torna alla segnalazione</button><div class="eos-proposal-safety"><strong>${icon('shield')} La sicurezza prima di tutto</strong><p>In presenza di minacce, aggressività o pericolo, interrompi ogni intervento e mantieni una distanza di sicurezza.</p></div><div class="eos-proposal-guide-block eos-proposal-escalation-block"><h3>${icon('check')} Cosa fare</h3><ul><li>Avvisa il responsabile del punto vendita.</li><li>Proteggi te stesso, colleghi e clienti senza esporti a rischi.</li><li>In caso di pericolo immediato, contatta i servizi di emergenza.</li></ul></div><div class="eos-proposal-guide-block eos-proposal-escalation-block"><h3>${icon('close')} Cosa evitare</h3><ul><li>Non affrontare, bloccare o inseguire la persona.</li><li>Non tentare di recuperare la merce.</li><li>Non attivare la deterrenza vocale se può aggravare la situazione.</li></ul></div><div class="eos-proposal-note-card eos-proposal-edit-note"><label for="criticalNote">Note operative (facoltative)</label><textarea id="criticalNote" maxlength="1000">${esc(a.criticalNotes||'')}</textarea></div><button class="eos-proposal-action eos-proposal-edit-save eos-proposal-critical-action" type="button" data-save-escalation="1">${icon('shield')} ${a.critical?'Salva modifica escalation':'Segnala escalation critica'}</button><p class="eos-proposal-period-warning">Nessuna chiamata, segnalazione o notifica viene inviata all’esterno.</p>`,'escalation');
+ openModal('Escalation critica',`<button type="button" class="eos-proposal-back" data-back-detail>${icon('arrow-left')} Torna alla segnalazione</button><div class="eos-proposal-safety"><strong>${icon('shield')} La sicurezza prima di tutto</strong><p>In presenza di minacce, aggressività o pericolo, interrompi ogni intervento e mantieni una distanza di sicurezza.</p></div><div class="eos-proposal-guide-block eos-proposal-escalation-block"><h3>${icon('check')} Cosa fare</h3><ul><li>Avvisa il responsabile del punto vendita.</li><li>Proteggi te stesso, colleghi e clienti senza esporti a rischi.</li><li>In caso di pericolo immediato, contatta i servizi di emergenza.</li></ul></div><div class="eos-proposal-guide-block eos-proposal-escalation-block"><h3>${icon('close')} Cosa evitare</h3><ul><li>Non affrontare, bloccare o inseguire la persona.</li><li>Non tentare di recuperare la merce.</li><li>Non attivare la deterrenza vocale se può aggravare la situazione.</li></ul></div><button class="eos-proposal-action eos-proposal-edit-save eos-proposal-critical-action" type="button" data-save-escalation="1">${icon('shield')} ${a.critical?'Escalation già registrata':'Segnala escalation critica'}</button><p class="eos-proposal-period-warning">Nessuna chiamata, segnalazione o notifica viene inviata all’esterno.</p>`,'escalation');
 }
-function saveEscalation(){const a=getAlert(selectedId);if(!a)return;a.critical=true;a.criticalNotes=$('criticalNote')?.value.trim()||'';a.events.unshift({ts:Date.now(),label:'Escalation critica registrata in locale'});save();render();showDetail(a.id);toast('Escalation registrata soltanto in locale')}
+function saveEscalation(){const a=getAlert(selectedId);if(!a)return;if(a.critical){showDetail(a.id);toast('Escalation già registrata');return}a.critical=true;a.events.unshift({ts:Date.now(),label:'Escalation critica registrata in locale'});save();render();showDetail(a.id);toast('Escalation registrata soltanto in locale')}
 function guideBack(){guideItem=null;renderGuide();window.scrollTo({top:0,behavior:'instant'})}
 function guideBlock(title,arr){if(!arr?.length)return '';return `<div class="eos-proposal-guide-block"><h3>${esc(title)}</h3><ul>${arr.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`}
 function guideProcedure(p){return `<button type="button" class="eos-proposal-back" data-guide-back>${icon('arrow-left')} Torna alle procedure</button><h2 class="eos-proposal-guide-title">${esc(p.title)}</h2>${p.id==='aggressione'?'<div class="eos-proposal-safety"><strong>La sicurezza prima di tutto</strong><p>La sicurezza di persone e personale viene prima di qualsiasi verifica.</p></div>':''}<div class="eos-proposal-guide-block"><h3>Cosa osservare</h3><p>${esc(p.intro)}</p></div>${guideBlock('Cosa fare',p.do)}${guideBlock('Cosa evitare',p.avoid)}${guideBlock('Quando richiedere supporto',p.support)}${guideBlock('Quando interrompere',p.stop)}`}
 function guideList(){return `<section class="guide-content-section eos-slim-guide"><h2 class="guide-section-title">Procedure operative</h2><div class="eos-proposal-guide-shelf">${GUIDE_PROCEDURES.map(p=>`<button type="button" class="eos-proposal-guide-link" data-procedure="${esc(p.id)}"><span>${esc(p.title)}</span>${icon('arrow')}</button>`).join('')}</div></section>`}
 function guideLegend(){
- const items=[['Conferma segnalazione','check','Se il comportamento segnalato è riconoscibile, conferma la segnalazione. La conferma non significa automaticamente che sia stato accertato un furto.'],['Scarta segnalazione','close','Se il movimento risulta normale oppure il rilevamento non è corretto, scarta la segnalazione.'],['Non determinabile','question','Se la ripresa o il contesto non consentono una valutazione attendibile, scegli Non determinabile. Non equivale né a conferma né a scarto.']];
- return `<section class="guide-content-section eos-slim-guide"><h2 class="guide-section-title">Stati e valutazioni</h2><div class="eos-proposal-guide-shelf">${items.map(([name,symbol,info])=>`<details class="eos-proposal-guide-evaluation"><summary><span class="eos-proposal-evaluation-symbol">${symbol==='question'?'<span class="eos-proposal-question-icon" aria-hidden="true">?</span>':icon(symbol)}</span><strong>${esc(name)}</strong>${icon('chevron')}</summary><p>${esc(info)}</p></details>`).join('')}</div><div class="eos-proposal-guide-block"><h3>Da verificare e scadute</h3><p>Le segnalazioni ancora da valutare sono nella Home. Dopo 48 ore senza verifica passano allo Storico come «Scaduta senza verifica».</p></div><div class="eos-proposal-guide-block"><h3>Note segnalazione (facoltative)</h3><p>Le note si possono inserire nella Home. Nello Storico sono consultabili; per aggiornarle occorre premere «Modifica valutazione».</p></div></section>`;
+ const items=[
+  ['Conferma segnalazione','check','Se il comportamento segnalato è riconoscibile, conferma la segnalazione. La conferma non significa automaticamente che sia stato accertato un furto.','confirmed'],
+  ['Scarta segnalazione','close','Se il movimento risulta normale oppure il rilevamento non è corretto, scarta la segnalazione.','dismissed'],
+  ['Non determinabile','question','Se la ripresa o il contesto non consentono una valutazione attendibile, scegli Non determinabile. Non equivale né a conferma né a scarto.','undetermined']
+ ];
+ return `<section class="guide-content-section eos-slim-guide eos-proposal-legend"><h2 class="guide-section-title">Come valutare una segnalazione</h2><div class="eos-proposal-guide-shelf">${items.map(([name,symbol,info,kind])=>`<details class="eos-proposal-guide-evaluation eos-proposal-guide-${kind}"><summary><span class="eos-proposal-evaluation-symbol">${symbol==='question'?'<span class="eos-proposal-question-icon" aria-hidden="true">?</span>':icon(symbol)}</span><strong>${esc(name)}</strong>${icon('chevron')}</summary><p>${esc(info)}</p></details>`).join('')}</div><div class="eos-proposal-guide-extras"><div class="eos-proposal-guide-aside"><h3>Segnalazioni non verificate</h3><p>Le segnalazioni ancora da valutare sono nella Home. Dopo 48 ore senza verifica passano allo Storico come «Scaduta senza verifica».</p></div><div class="eos-proposal-guide-aside"><h3>Note e modifiche</h3><p>Le note sono facoltative e si possono inserire nella Home. Nello Storico si consultano insieme alla valutazione; per modificarle, premi «Modifica valutazione».</p></div></div></section>`;
 }
 function guidePrivacy(){return `<section class="guide-content-section eos-slim-guide eos-r22-privacy"><h2 class="eos-proposal-guide-title">Privacy e sicurezza</h2><div class="privacy-facts"><div class="privacy-fact">${icon('shield')}<div><h3>Accesso riservato</h3><p>Le segnalazioni devono essere consultate soltanto da personale autorizzato.</p></div></div><div class="privacy-fact">${icon('lock')}<div><h3>Riservatezza</h3><p>Non condividere immagini o informazioni tramite canali o dispositivi personali non autorizzati.</p></div></div><div class="privacy-fact">${icon('shield')}<div><h3>Comportamento verso i clienti</h3><p>Una segnalazione non giustifica accuse, perquisizioni, inseguimenti o trattenimenti fisici.</p></div></div><div class="privacy-fact">${icon('shield')}<div><h3>Sicurezza delle persone</h3><p>In caso di minacce o aggressività, interrompi l’intervento e segui le procedure aziendali. Se necessario, chiama il 112.</p></div></div></div></section>`}
 function renderGuide(){const banner=$('guideReturnBanner');banner.hidden=!guideReturn;banner.innerHTML=guideReturn?`<button class="eos-proposal-back" type="button" data-return-alert>${icon('arrow-left')} Torna alla segnalazione</button>`:'';document.querySelectorAll('[data-guide-tab]').forEach(z=>{const active=z.dataset.guideTab===guideTab;z.classList.toggle('active',active);z.setAttribute('aria-pressed',String(active))});$('guideContent').innerHTML=guideItem?guideProcedure(GUIDE_PROCEDURES.find(p=>p.id===guideItem)||GUIDE_PROCEDURES[0]):guideTab==='privacy'?guidePrivacy():guideTab==='legend'?guideLegend():guideList()}
