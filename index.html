@@ -2546,6 +2546,29 @@ summary:focus-visible{outline:2px solid #0e8e89;outline-offset:2px}
 .eos-v1-escalation-footer .eos-v1-escalation-submit{width:100%;min-height:42px;background:#fff7f7;color:#9d4650;border-color:#d7a3a9;font-size:13px;margin:0}
 .eos-v1-escalation-footer .eos-v1-escalation-submit svg{width:17px;height:17px}
 @media(max-width:620px){#dialog.escalation-dialog{width:min(100%,390px)}.eos-v1-escalation-content{padding:13px 17px 9px}.eos-v1-escalation-footer{padding:9px 17px 12px}}
+
+/* V1 — Stato escalation nello Storico e modifica centralizzata. */
+.eos-v1-record-critical{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #e8eff2;margin-top:12px;padding:12px 0 0;min-width:0}
+.eos-v1-record-critical>span:first-child{font-size:12.5px;font-weight:650;color:#687f8e}
+.eos-v1-record-critical-value{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;text-align:right;white-space:nowrap;color:#687f8e}
+.eos-v1-record-critical-value.active{color:#a3424c}
+.eos-v1-record-critical-value svg{width:16px;height:16px;flex:none}
+.eos-v1-edit-critical{margin-top:16px}
+.eos-v1-edit-critical-toggle{display:flex;gap:10px;align-items:center;min-height:48px;border:1px solid #d4e2e8;border-radius:10px;padding:11px 12px;color:#31576c;background:#fff;cursor:pointer}
+.eos-v1-edit-critical-toggle.is-active{border-color:#d7a5ac;background:#fff9f9}
+.eos-v1-edit-critical-toggle input{accent-color:#ac4651;width:18px;height:18px;flex:none;margin:0}
+.eos-v1-edit-critical-name{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;flex:1 1 auto;min-width:0}
+.eos-v1-edit-critical-name svg{width:17px;height:17px;flex:none}
+.eos-v1-edit-critical-status{font-size:12px;font-weight:650;color:#708694;white-space:nowrap}
+.eos-v1-edit-critical-toggle.is-active .eos-v1-edit-critical-status{color:#a3424c}
+.eos-v1-edit-escalation-advice{border:1px solid #e8d4d5;border-radius:10px;padding:12px;margin-top:9px;background:#fffcfc}
+.eos-v1-edit-escalation-advice[hidden]{display:none!important}
+.eos-v1-edit-escalation-advice .eos-v1-escalation-safety{margin-bottom:9px}
+.eos-v1-edit-escalation-advice .eos-v1-escalation-section{margin-bottom:6px;padding-bottom:6px}
+.eos-v1-edit-escalation-advice .eos-v1-escalation-hint{color:#718694;font-size:11.5px;line-height:1.45;margin:7px 0 10px}
+.eos-v1-edit-escalation-read{display:flex;align-items:flex-start;gap:9px;border-top:1px solid #efdcdf;padding-top:10px;font-size:12.5px;font-weight:670;color:#91414d;cursor:pointer}
+.eos-v1-edit-escalation-read input{width:17px;height:17px;accent-color:#a3424c;flex:none;margin:1px 0 0}
+
 </style></head><body class="login-mode">
 <svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-search" viewbox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></symbol>
@@ -2759,28 +2782,56 @@ function detailHtml(a){
  const draft=reviewDrafts[a.id]||{choice:'',notes:a.notes||''};
  const evaluation=`<section class="eos-v1-assessment" aria-label="Valutazione segnalazione"><fieldset class="eos-v1-choices"><legend>Valutazione segnalazione</legend>${reviewChoiceRows('proposalReview',draft.choice)}</fieldset>${compactNote('proposalNote',draft.notes)}<button id="saveProposalReview" type="button" class="eos-proposal-action primary eos-v1-save" data-save-evaluation ${draft.choice?'':'disabled'}>${icon('check')} Salva segnalazione</button></section>`;
  const operations=`<div class="eos-proposal-access eos-v1-operations"><button type="button" class="eos-proposal-action eos-proposal-critical-action" data-escalation="${esc(a.id)}">${icon('shield')} Escalation critica</button><button type="button" class="eos-proposal-action eos-proposal-guide-cta" data-quick-guide="${esc(a.id)}"><span class="eos-proposal-guide-cta-center">${icon('book')} <span>Guida operativa</span></span><span class="eos-proposal-guide-arrow" aria-hidden="true">${icon('arrow')}</span></button></div>`;
- // In the history, review + notes are read-only except via Modifica valutazione.
- const historyRecord=`<section class="eos-proposal-record" aria-label="${status==='expired'?'Stato segnalazione':'Valutazione registrata'}"><h4>${status==='expired'?'Stato segnalazione':'Valutazione registrata'}</h4><div class="eos-proposal-record-state"><span>Stato</span>${badge(a)}</div><div class="eos-proposal-record-notes"><span>Note segnalazione</span><p class="${a.notes?'':'eos-proposal-no-notes'}">${a.notes?esc(a.notes):'Nessuna nota inserita.'}</p></div>${status==='expired'?'<p class="eos-proposal-period-warning">La segnalazione non è più verificabile in questa simulazione.</p>':`<button class="eos-proposal-action eos-proposal-modify" type="button" data-edit-evaluation="${esc(a.id)}">${icon('edit')} Modifica valutazione</button>`}</section>`;
- const criticalIndicator=a.critical?`<div class="eos-v1-critical-indicator" role="status"><span class="eos-v1-red-dot" aria-hidden="true"></span>${icon('shield')}<span class="eos-v1-critical-label">Escalation critica segnalata</span><button class="eos-v1-critical-undo" type="button" data-undo-escalation="${esc(a.id)}" aria-label="Annulla escalation critica">Annulla</button></div>`:'';
+ // Storico: valutazione, note ed escalation consultabili; tutte le modifiche sono accorpate in «Modifica segnalazione».
+ const criticalStatus=`<span class="eos-v1-record-critical-value ${a.critical?'active':'inactive'}">${a.critical?`<span class="eos-v1-red-dot" aria-hidden="true"></span>${icon('shield')} Segnalata`:'Non segnalata'}</span>`;
+ const historyRecord=`<section class="eos-proposal-record" aria-label="${status==='expired'?'Stato segnalazione':'Valutazione registrata'}"><h4>${status==='expired'?'Stato segnalazione':'Valutazione registrata'}</h4><div class="eos-proposal-record-state"><span>Stato</span>${badge(a)}</div><div class="eos-proposal-record-notes"><span>Note segnalazione</span><p class="${a.notes?'':'eos-proposal-no-notes'}">${a.notes?esc(a.notes):'Nessuna nota inserita.'}</p></div><div class="eos-v1-record-critical"><span>Escalation critica</span>${criticalStatus}</div>${status==='expired'?'<p class="eos-proposal-period-warning">La segnalazione non è più verificabile in questa simulazione.</p>':`<button class="eos-proposal-action eos-proposal-modify" type="button" data-edit-evaluation="${esc(a.id)}">${icon('edit')} Modifica segnalazione</button>`}</section>`;
+ // Solo le segnalazioni ancora aperte consentono di annullare direttamente l'escalation.
+ const criticalIndicator=pending&&a.critical?`<div class="eos-v1-critical-indicator" role="status"><span class="eos-v1-red-dot" aria-hidden="true"></span>${icon('shield')}<span class="eos-v1-critical-label">Escalation critica segnalata</span><button class="eos-v1-critical-undo" type="button" data-undo-escalation="${esc(a.id)}" aria-label="Annulla escalation critica">Annulla</button></div>`:'';
  // Preserve internal event history for auditing; do not show the redundant activity log in this detail.
  return `${header}${summary}${pending?evaluation+operations:historyRecord}${criticalIndicator}`;
 }
 function showDetail(id){const a=getAlert(id);if(!a)return;selectedId=id;openModal(stateOf(a)==='expired'?'Dettaglio segnalazione scaduta':'Dettaglio segnalazione',detailHtml(a),'detail');resizeNoteField($('proposalNote'))}
+function editEscalationSafetyHtml(){
+ // Nel cambio da «Non segnalata» a «Segnalata», mostra la procedura prima del salvataggio.
+ return `<div id="editEscalationAdvice" class="eos-v1-edit-escalation-advice" hidden>
+  <section class="eos-v1-escalation-safety"><strong>${icon('shield')} La sicurezza prima di tutto</strong><p>In presenza di minacce, aggressività o pericolo, interrompi ogni intervento e mantieni una distanza di sicurezza.</p></section>
+  <section class="eos-v1-escalation-section"><h3>${icon('check')} Cosa fare</h3><ul><li>Avvisa il responsabile del punto vendita.</li><li>Proteggi te stesso, colleghi e clienti senza esporti a rischi.</li><li>In caso di pericolo immediato, contatta i servizi di emergenza.</li></ul></section>
+  <section class="eos-v1-escalation-section"><h3>${icon('close')} Cosa evitare</h3><ul><li>Non affrontare, bloccare o inseguire la persona.</li><li>Non tentare di recuperare la merce.</li></ul></section>
+  <p class="eos-v1-escalation-hint">L'escalation viene registrata solo in questo laboratorio. Non vengono inviate notifiche o chiamate esterne.</p>
+  <label class="eos-v1-edit-escalation-read"><input id="editEscalationRead" type="checkbox"><span>Ho letto le indicazioni di sicurezza</span></label>
+ </div>`;
+}
+function syncEditEscalation(){
+ const a=getAlert(selectedId),field=$('editCritical'),advice=$('editEscalationAdvice'),current=$('editCriticalStatus');
+ if(!a||!field||!advice)return;
+ const newlyActivating=field.checked&&!a.critical;
+ advice.hidden=!newlyActivating;
+ if(current)current.textContent=field.checked?'Segnalata':'Non segnalata';
+ const row=field.closest('.eos-v1-edit-critical-toggle');
+ if(row)row.classList.toggle('is-active',field.checked);
+}
 function editEvaluation(){
  const a=getAlert(selectedId);if(!a||stateOf(a)==='expired'||stateOf(a)==='pending')return;
- openModal('Modifica valutazione',`<button type="button" class="eos-proposal-back" data-back-detail>${icon('arrow-left')} Torna alla segnalazione</button><fieldset class="eos-v1-choices eos-v1-edit-choices"><legend>Valutazione segnalazione</legend>${reviewChoiceRows('editedEvaluation',a.status)}</fieldset>${compactNote('editedNotes',a.notes||'')}<button class="eos-proposal-action primary eos-v1-save" type="button" data-commit-edit>Salva modifiche</button>`,'edit');
- resizeNoteField($('editedNotes'));
+ openModal('Modifica segnalazione',`<button type="button" class="eos-proposal-back" data-back-detail>${icon('arrow-left')} Torna alla segnalazione</button><fieldset class="eos-v1-choices eos-v1-edit-choices"><legend>Valutazione segnalazione</legend>${reviewChoiceRows('editedEvaluation',a.status)}</fieldset>${compactNote('editedNotes',a.notes||'')}<div class="eos-v1-edit-critical"><label class="eos-v1-edit-critical-toggle ${a.critical?'is-active':''}" for="editCritical"><input id="editCritical" type="checkbox" ${a.critical?'checked':''}><span class="eos-v1-edit-critical-name">${icon('shield')} Escalation critica</span><span id="editCriticalStatus" class="eos-v1-edit-critical-status">${a.critical?'Segnalata':'Non segnalata'}</span></label>${editEscalationSafetyHtml()}</div><button class="eos-proposal-action primary eos-v1-save" type="button" data-commit-edit>Salva modifiche</button>`,'edit');
+ resizeNoteField($('editedNotes'));syncEditEscalation();
 }
 function commitEvaluationEdit(){
  const a=getAlert(selectedId);if(!a||stateOf(a)==='expired'||stateOf(a)==='pending')return;
  const next=document.querySelector('input[name="editedEvaluation"]:checked')?.value;
  if(!choices[next]){toast('Seleziona una valutazione');return}
  const nextNotes=$('editedNotes')?.value.trim()||'';
- const changeStatus=next!==a.status,changeNotes=nextNotes!==a.notes;
- if(!changeStatus&&!changeNotes){showDetail(a.id);toast('Nessuna modifica');return}
+ const nextCritical=!!$('editCritical')?.checked;
+ const changeStatus=next!==a.status,changeNotes=nextNotes!==a.notes,changeCritical=nextCritical!==!!a.critical;
+ if(changeCritical&&nextCritical&&!$('editEscalationRead')?.checked){
+  toast('Leggi e conferma le indicazioni di sicurezza prima di segnalare l’escalation');
+  $('editEscalationAdvice').hidden=false;
+  $('editEscalationRead')?.focus();return;
+ }
+ if(!changeStatus&&!changeNotes&&!changeCritical){showDetail(a.id);toast('Nessuna modifica');return}
  const now=Date.now();
  if(changeStatus){a.events.unshift({ts:now,label:`Valutazione rettificata: ${choices[a.status]} → ${choices[next]}`});a.status=next;a.reviewedAt=now}
  if(changeNotes){a.notes=nextNotes;a.notesUpdatedAt=now;a.events.unshift({ts:now,label:nextNotes?'Note aggiornate':'Note rimosse'})}
+ if(changeCritical){a.critical=nextCritical;a.events.unshift({ts:now,label:nextCritical?'Escalation critica segnalata nello Storico':'Escalation critica annullata nello Storico'})}
  save();render();showDetail(a.id);toast('Modifiche salvate nello Storico');
 }
 function quickGuide(){
@@ -2855,7 +2906,7 @@ function guideLegend(){
   ['Scarta segnalazione','close','Se il movimento risulta normale oppure il rilevamento non è corretto, scarta la segnalazione.','dismissed'],
   ['Non determinabile','question','Se la ripresa o il contesto non consentono una valutazione attendibile, scegli Non determinabile. Non equivale né a conferma né a scarto.','undetermined']
  ];
- return `<section class="guide-content-section eos-slim-guide eos-proposal-legend"><h2 class="guide-section-title">Come valutare una segnalazione</h2><div class="eos-proposal-guide-shelf">${items.map(([name,symbol,info,kind])=>`<details class="eos-proposal-guide-evaluation eos-proposal-guide-${kind}"><summary><span class="eos-proposal-evaluation-symbol">${symbol==='question'?'<span class="eos-proposal-question-icon" aria-hidden="true">?</span>':icon(symbol)}</span><strong>${esc(name)}</strong>${icon('chevron')}</summary><p>${esc(info)}</p></details>`).join('')}</div><div class="eos-proposal-guide-extras"><div class="eos-proposal-guide-aside"><h3>Segnalazioni non verificate</h3><p>Le segnalazioni ancora da valutare sono nella Home. Dopo 48 ore senza verifica passano allo Storico come «Scaduta senza verifica».</p></div><div class="eos-proposal-guide-aside"><h3>Note e modifiche</h3><p>Seleziona una valutazione, inserisci eventualmente una nota e premi «Salva segnalazione»: la scelta e le note vengono salvate insieme. Nello Storico puoi modificarle tramite «Modifica valutazione».</p></div></div></section>`;
+ return `<section class="guide-content-section eos-slim-guide eos-proposal-legend"><h2 class="guide-section-title">Come valutare una segnalazione</h2><div class="eos-proposal-guide-shelf">${items.map(([name,symbol,info,kind])=>`<details class="eos-proposal-guide-evaluation eos-proposal-guide-${kind}"><summary><span class="eos-proposal-evaluation-symbol">${symbol==='question'?'<span class="eos-proposal-question-icon" aria-hidden="true">?</span>':icon(symbol)}</span><strong>${esc(name)}</strong>${icon('chevron')}</summary><p>${esc(info)}</p></details>`).join('')}</div><div class="eos-proposal-guide-extras"><div class="eos-proposal-guide-aside"><h3>Segnalazioni non verificate</h3><p>Le segnalazioni ancora da valutare sono nella Home. Dopo 48 ore senza verifica passano allo Storico come «Scaduta senza verifica».</p></div><div class="eos-proposal-guide-aside"><h3>Note e modifiche</h3><p>Seleziona una valutazione, inserisci eventualmente una nota e premi «Salva segnalazione»: la scelta e le note vengono salvate insieme. Nello Storico puoi modificare valutazione, note ed escalation tramite «Modifica segnalazione».</p></div></div></section>`;
 }
 function guidePrivacy(){return `<section class="guide-content-section eos-slim-guide eos-r22-privacy"><h2 class="eos-proposal-guide-title">Privacy e sicurezza</h2><div class="privacy-facts"><div class="privacy-fact">${icon('shield')}<div><h3>Accesso riservato</h3><p>Le segnalazioni devono essere consultate soltanto da personale autorizzato.</p></div></div><div class="privacy-fact">${icon('lock')}<div><h3>Riservatezza</h3><p>Non condividere immagini o informazioni tramite canali o dispositivi personali non autorizzati.</p></div></div><div class="privacy-fact">${icon('shield')}<div><h3>Comportamento verso i clienti</h3><p>Una segnalazione non giustifica accuse, perquisizioni, inseguimenti o trattenimenti fisici.</p></div></div><div class="privacy-fact">${icon('shield')}<div><h3>Sicurezza delle persone</h3><p>In caso di minacce o aggressività, interrompi l’intervento e segui le procedure aziendali. Se necessario, chiama il 112.</p></div></div></div></section>`}
 function renderGuide(){const banner=$('guideReturnBanner');banner.hidden=!guideReturn;banner.innerHTML=guideReturn?`<button class="eos-proposal-back" type="button" data-return-alert>${icon('arrow-left')} Torna alla segnalazione</button>`:'';document.querySelectorAll('[data-guide-tab]').forEach(z=>{const active=z.dataset.guideTab===guideTab;z.classList.toggle('active',active);z.setAttribute('aria-pressed',String(active))});$('guideContent').innerHTML=guideItem?guideProcedure(GUIDE_PROCEDURES.find(p=>p.id===guideItem)||GUIDE_PROCEDURES[0]):guideTab==='privacy'?guidePrivacy():guideTab==='legend'?guideLegend():guideList()}
@@ -2904,7 +2955,7 @@ function resetExample(){if(!confirm('Ripristinare soltanto i dati di questa vari
 // Keep all real user interaction in this independent document: no network or external writes.
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.page){nav(b.dataset.page);return}if(b.dataset.alert){showDetail(b.dataset.alert);return}if(b.dataset.saveEvaluation!==undefined){saveProposalReview();return}if(b.dataset.backDetail!==undefined){showDetail(selectedId);return}if(b.dataset.editEvaluation){editEvaluation();return}if(b.dataset.commitEdit!==undefined){commitEvaluationEdit();return}if(b.dataset.quickGuide){quickGuide();return}if(b.dataset.escalation){escalation();return}if(b.dataset.commitEscalation!==undefined){commitEscalation();return}if(b.dataset.undoEscalation){undoEscalation();return}if(b.dataset.completeGuide){completeGuide();return}if(b.dataset.procedure){guideItem=b.dataset.procedure;renderGuide();window.scrollTo({top:0});return}if(b.dataset.guideBack!==undefined){guideBack();return}if(b.dataset.guideTab){guideTab=b.dataset.guideTab;guideItem=null;renderGuide();return}if(b.dataset.returnAlert!==undefined){const id=guideReturn;guideReturn=null;guideItem=null;nav('home');if(id)showDetail(id);return}if(b.id==='closeModal'){closeModal();return}if(b.id==='historyShowMore'){historyLimit+=10;renderHistory();return}if(b.id==='historyExport'){exportHistory();return}if(b.id==='homeRefresh'){render();toast('Elenco aggiornato dal browser');return}if(b.id==='showHomeAll'){homeAll=!homeAll;renderHome();return}if(b.dataset.modal==='account'){const m=$('mobileAuxMenu');if(m)m.hidden=true;const t=$('mobileAuxToggle');if(t)t.setAttribute('aria-expanded','false');account();return}if(b.dataset.modal==='support'){const m=$('mobileAuxMenu');if(m)m.hidden=true;const t=$('mobileAuxToggle');if(t)t.setAttribute('aria-expanded','false');support();return}if(b.id==='loginForgot'){toast('Recupero password disponibile dopo il collegamento del servizio di autenticazione.');return}if(b.id==='togglePasswordForm'){const box=$('passwordFormContainer');box.hidden=!box.hidden;b.setAttribute('aria-expanded',String(!box.hidden));return}if(b.id==='logoutDemo'){leaveLab();return}if(b.id==='mobileAuxToggle'){const menu=$('mobileAuxMenu');menu.hidden=!menu.hidden;b.setAttribute('aria-expanded',String(!menu.hidden));return}if(b.dataset.addExample!==undefined){addExample();return}if(b.dataset.resetExample!==undefined){resetExample();return}});
 
-document.addEventListener('change',e=>{if(e.target.name==='proposalReview')syncReviewDraft()});
+document.addEventListener('change',e=>{if(e.target.name==='proposalReview')syncReviewDraft();if(e.target.id==='editCritical')syncEditEscalation()});
 document.addEventListener('input',e=>{if(e.target.id==='proposalNote')syncReviewDraft();else if(e.target.id==='editedNotes')resizeNoteField(e.target)});
 document.addEventListener('submit',e=>{
  if(e.target.id==='loginForm'){
