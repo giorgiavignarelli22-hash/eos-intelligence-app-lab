@@ -2569,6 +2569,12 @@ summary:focus-visible{outline:2px solid #0e8e89;outline-offset:2px}
 .eos-v1-edit-escalation-read{display:flex;align-items:flex-start;gap:9px;border-top:1px solid #efdcdf;padding-top:10px;font-size:12.5px;font-weight:670;color:#91414d;cursor:pointer}
 .eos-v1-edit-escalation-read input{width:17px;height:17px;accent-color:#a3424c;flex:none;margin:1px 0 0}
 
+
+/* V1: Home senza riquadro per l'assenza di segnalazioni; escalation riconoscibile nello Storico. */
+#page-home .eos-proposal-empty{border:0;background:transparent;box-shadow:none;border-radius:0;padding:12px 0 16px;color:#708693;text-align:left;}
+.eos-v1-history-critical{display:inline-flex;align-items:center;gap:6px;color:#a3424c;font-weight:700;font-size:12px;line-height:1.4;white-space:normal;}
+.eos-v1-history-critical .eos-v1-red-dot{flex:none;}
+.eos-v1-history-critical svg{width:15px;height:15px;flex:none;}
 </style></head><body class="login-mode">
 <svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-search" viewbox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></symbol>
@@ -2769,7 +2775,7 @@ function card(a){return `<button type="button" class="home-directory-card" data-
 function renderHome(){const pending=sorted().filter(a=>stateOf(a)==='pending');const shown=homeAll?pending:pending.slice(0,5);$('homeFocus').innerHTML=`<section class="home-directory"><div class="home-directory-heading"><h2 class="home-directory-title">Da verificare <span class="home-total-pill">${pending.length}</span></h2><button type="button" id="homeRefresh" class="home-refresh-icon" aria-label="Aggiorna segnalazioni">${icon('refresh')}</button></div>${shown.length?shown.map(card).join(''):'<div class="eos-proposal-empty">Nessuna segnalazione da verificare</div>'}${pending.length>5?`<button type="button" class="eos-home-more" id="showHomeAll">${homeAll?'Mostra le ultime cinque':'Visualizza tutte le segnalazioni da verificare'}</button>`:''}<button type="button" class="eos-home-history-link" data-page="history">Visualizza segnalazioni precedenti ${icon('arrow')}</button></section>`}
 function matchPeriod(ts){const diff=Date.now()-ts;return historyPeriod==='all'||diff>=0&&diff<({'recent':24,'48':48,'72':72,'7d':168,'30d':720,'90d':2160}[historyPeriod]||168)*H}
 function historyRows(){return sorted().filter(a=>stateOf(a)!=='pending'&&matchPeriod(a.ts)&&(historyStatus==='all'||stateOf(a)===historyStatus))}
-function historyCard(a){return `<button type="button" class="eos-proposal-history-card" data-alert="${esc(a.id)}"><span class="eos-proposal-history-content"><span>${badge(a)}</span><strong class="eos-proposal-history-title">${esc(a.id)} · ${esc(a.camera)}</strong><span class="eos-proposal-history-meta">${esc(a.area)} · ${fmtDate(a.ts)} · ${fmtTime(a.ts)}</span>${notePreview(a)}</span>${icon('arrow')}</button>`}
+function historyCard(a){const escalationTag=a.critical?`<span class="eos-v1-history-critical"><span class="eos-v1-red-dot" aria-hidden="true"></span>${icon('shield')} Escalation critica segnalata</span>`:'';return `<button type="button" class="eos-proposal-history-card" data-alert="${esc(a.id)}"><span class="eos-proposal-history-content"><span>${badge(a)}</span><strong class="eos-proposal-history-title">${esc(a.id)} · ${esc(a.camera)}</strong><span class="eos-proposal-history-meta">${esc(a.area)} · ${fmtDate(a.ts)} · ${fmtTime(a.ts)}</span>${notePreview(a)}${escalationTag}</span>${icon('arrow')}</button>`}
 function renderHistory(){const rows=historyRows(),shown=rows.slice(0,historyLimit);$('historyPeriod').value=historyPeriod;$('historyStatus').value=historyStatus;$('historyCount').textContent=rows.length;$('historyList').innerHTML=shown.length?shown.map(historyCard).join(''):'<div class="eos-proposal-empty">Nessuna segnalazione per i filtri selezionati</div>';$('historyShowMore').hidden=rows.length<=historyLimit;$('historyShowMore').textContent=`Mostra altre segnalazioni (${rows.length-historyLimit})`}
 function render(){renderHome();renderHistory();renderGuide()}
 function nav(target){if(!['home','history','guide'].includes(target))return;screen=target;document.querySelectorAll('.screen').forEach(z=>z.classList.toggle('active',z.id==='page-'+target));document.querySelectorAll('[data-page]').forEach(z=>z.classList.toggle('active',z.dataset.page===target));if(target==='history')renderHistory();if(target==='guide')renderGuide();window.scrollTo({top:0,behavior:'instant'})}
@@ -2777,7 +2783,7 @@ function openModal(title,body,type){modal=type;$('modalTitle').textContent=title
 function closeModal(goBack=true){if(modal==='detail')stashReviewDraft();const was=modal;$('modalRoot').classList.remove('open');document.body.style.overflow='';modal='';if(goBack&&['review','quick','deterrence','escalation'].includes(was)&&selectedId){showDetail(selectedId);return}selectedId=null}
 function detailHtml(a){
  const status=stateOf(a),pending=status==='pending';
- const header=status==='expired'?`<div class="manual-help history-video-note">${icon('lock')} Video non disponibile</div>`:`<div class="detail-video eos-proposal-r23-video"><span class="video-play" aria-hidden="true">${icon('play')}</span><div class="video-caption"><span>Video evento</span><span>Clip reale non collegata in questo laboratorio</span></div></div>`;
+ const header=status==='expired'?`<div class="manual-help history-video-note">${icon('lock')} Video non disponibile</div>`:`<div class="detail-video eos-proposal-r23-video"><span class="video-play" aria-hidden="true">${icon('play')}</span><div class="video-caption"><span>Video evento</span><span>Clip reale non collegata</span></div></div>`;
  const summary=`<div class="detail-summary eos-detail-outcome-summary"><div><h3>Gesto sospetto rilevato</h3><p>${esc(a.id)} · ${esc(a.camera)}</p></div>${badge(a)}</div><div class="detail-fields"><div class="field-pair"><span>Data e ora</span><strong>${fmtDate(a.ts)} · ${fmtTime(a.ts)}</strong></div><div class="field-pair"><span>Area / zona</span><strong>${esc(a.area)}</strong></div></div>`;
  const draft=reviewDrafts[a.id]||{choice:'',notes:a.notes||''};
  const evaluation=`<section class="eos-v1-assessment" aria-label="Valutazione segnalazione"><fieldset class="eos-v1-choices"><legend>Valutazione segnalazione</legend>${reviewChoiceRows('proposalReview',draft.choice)}</fieldset>${compactNote('proposalNote',draft.notes)}<button id="saveProposalReview" type="button" class="eos-proposal-action primary eos-v1-save" data-save-evaluation ${draft.choice?'':'disabled'}>${icon('check')} Salva segnalazione</button></section>`;
@@ -2797,7 +2803,7 @@ function editEscalationSafetyHtml(){
   <section class="eos-v1-escalation-safety"><strong>${icon('shield')} La sicurezza prima di tutto</strong><p>In presenza di minacce, aggressività o pericolo, interrompi ogni intervento e mantieni una distanza di sicurezza.</p></section>
   <section class="eos-v1-escalation-section"><h3>${icon('check')} Cosa fare</h3><ul><li>Avvisa il responsabile del punto vendita.</li><li>Proteggi te stesso, colleghi e clienti senza esporti a rischi.</li><li>In caso di pericolo immediato, contatta i servizi di emergenza.</li></ul></section>
   <section class="eos-v1-escalation-section"><h3>${icon('close')} Cosa evitare</h3><ul><li>Non affrontare, bloccare o inseguire la persona.</li><li>Non tentare di recuperare la merce.</li></ul></section>
-  <p class="eos-v1-escalation-hint">L'escalation viene registrata solo in questo laboratorio. Non vengono inviate notifiche o chiamate esterne.</p>
+  <p class="eos-v1-escalation-hint">Non vengono inviate notifiche o chiamate esterne.</p>
   <label class="eos-v1-edit-escalation-read"><input id="editEscalationRead" type="checkbox"><span>Ho letto le indicazioni di sicurezza</span></label>
  </div>`;
 }
@@ -2869,7 +2875,7 @@ function escalationInstructionsHtml(){
      <li>Non tentare di recuperare la merce.</li>
     </ul>
    </section>
-   <p class="eos-v1-escalation-hint">L'escalation viene registrata solo in questo laboratorio. Non vengono inviate notifiche o chiamate esterne.</p>
+   <p class="eos-v1-escalation-hint">Non vengono inviate notifiche o chiamate esterne.</p>
   </div>
   <div class="eos-v1-escalation-footer"><button type="button" class="eos-proposal-action eos-v1-escalation-submit" data-commit-escalation>${icon('shield')} Segnala escalation critica</button></div>
  </div>`;
@@ -2884,15 +2890,15 @@ function commitEscalation(){
  const a=getAlert(selectedId);if(!a||stateOf(a)!=='pending'||a.critical)return;
  // Only this explicit confirmation changes the alert.
  a.critical=true;
- a.events.unshift({ts:Date.now(),label:'Escalation critica segnalata nel laboratorio'});
+ a.events.unshift({ts:Date.now(),label:'Escalation critica segnalata'});
  save();render();showDetail(a.id);
- toast('Escalation critica segnalata nel laboratorio');
+ toast('Escalation critica segnalata');
 }
 function undoEscalation(){
  const a=getAlert(selectedId);if(!a||!a.critical)return;
  stashReviewDraft();
  a.critical=false;
- a.events.unshift({ts:Date.now(),label:'Escalation critica annullata nel laboratorio'});
+ a.events.unshift({ts:Date.now(),label:'Escalation critica annullata'});
  save();render();showDetail(a.id);
  toast('Escalation critica annullata');
 }
